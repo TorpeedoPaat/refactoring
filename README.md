@@ -19,12 +19,36 @@ Kui tiimis on analüütik, kes ei programmeeri, siis tuleb tal hinde saamiseks k
 
 Ärinõue: autot saab rentida alates 18. eluaastast
 Vajalikud testid:
-1. 17-aastane ei saa autot rentida  
+1.  17-aastane ei saa autot rentida  
 -- sisendite kombinatsioon: vanus: 17, [...]  
--- oodatav väljund: Exception  
+-- oodatav väljund: Exception
 2. 18-aastane saab autot rentida  
 -- sisendite kombinatsioon: vanus: 18, [...]  
--- oodatav väljund: hind 18-aastasele XXX EUR  
+-- oodatav väljund: hind 18-aastasele XXX EUR 
+3. 18-21 aastane saab rentida 1 klassi kuuluvaid autosi 
+-- sisendite kombinatsioon: vanus: 18, 19, 20, 21
+-- oodatav väljund: hind [...]-aastasele XXX EUR
+4. Maksimaalne rendi hind 1000
+-- sisendite kombinatsioon: hind: 1001, 2000, [...]  
+-- oodatav väljund: Exception
+5. Minimaalne rendi hind võrdub juhi vanusega
+-- sisendite kombinatsioon: vanus: 18, 23, [...]  
+-- oodatav väljund: hind [...]-aastasele XXX EUR
+6. Minimaalne rendi hind võrdub juhi vanusega
+-- sisendite kombinatsioon: vanus: 18, 23, [...]  
+-- oodatav väljund: hind [...]-aastasele XXX EUR
+7. Klassides 4 ja 5 on hind 50% kallim kui juht on 25-aastane või noorem (välja arvatud madalhooajal)
+-- sisendite kombinatsioon: vanus: 18, [...] ; klass: 4, 5 ; Madalhooaeg: True, False
+-- oodatav väljund: hind [...]-aastasele XXX EUR
+8. Rentida ei saa isikud, kellel on juhiluba olnud alla aasta
+-- sisendite kombinatsioon: Juhiloa aeg: 0, [...]
+-- oodatav väljund: Exception
+9. Kui juhiluba on olnud alla kolme aasta, siis on rendi hind 30% suurem
+-- sisendite kombinatsioon: Juhiloa aeg: 1, [...]
+-- oodatav väljund: hind [...]-aastasele XXX EUR
+10. Kui isik on põhjustanud viimase aasta jooksul liiklusõnnestusi ja isik on alla 30 aasta vana, siis lisandub rendi ööpäevahinnale 15 eurot.
+-- sisendite kombinatsioon: Liiklusõnnetusi viimase aasta jooksul: True, False ; vanus: 18, [...]
+-- oodatav väljund: hind [...]-aastasele XXX EUR
 
 NB! Oodatavad väljundid sõltuvad ka teie programmi struktuurist. Kui originaalprogramm väljastab Exceptioni lõppkasutajale, siis teie võite vanusekontrolli viia eraldi meetodiks, mis tagastab vaid TRUE/FALSE
 
